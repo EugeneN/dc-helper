@@ -1,0 +1,26 @@
+{
+  "name": "dc-helper",
+  "description": "DNA component IDom",
+  "version": "0.0.1",
+  "author": {
+    "name": "E.Naumenko"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EugeneN/dc-helper"
+  },
+  "dependencies": {
+    "libprotein": "*",
+    "console-logger": "*",
+    "dna-lang": "*"
+  },
+  "scripts": {
+    "postinstall": "coffee -c index.coffee"
+  },
+  "engine": [
+    "node >=0.1.102"
+  ],
+  "main": "./index.js",
+  "readme": "libmonad\n========",
+  "readmeFilename": "README.md"
+}
