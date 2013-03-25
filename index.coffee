@@ -29,10 +29,14 @@ module.exports =
 
                 ['push-to-google', ['vec']]
 
+                ['###',     ['blk', 'args']]
+
             ]
 
         implementations:
             IHelper: (node) ->
+                '###': (block, args) -> args
+
                 'push-to-google': (p) ->
                     debug 'push-to-google', p
                     push_to_google p...
