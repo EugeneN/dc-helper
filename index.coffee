@@ -30,11 +30,14 @@ module.exports =
                 ['push-to-google', ['vec']]
 
                 ['###',     ['blk', 'args']]
+                ['wrap',    ['tpl', 'pattern', 'value']]
 
             ]
 
         implementations:
             IHelper: (node) ->
+                wrap: (t, p, v) -> t.replace p, v
+
                 '###': (block, args) -> args
 
                 'push-to-google': (p) ->
