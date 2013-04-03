@@ -32,10 +32,17 @@ module.exports =
                 ['###',     ['blk', 'args']]
                 ['wrap',    ['tpl', 'pattern', 'value']]
 
+                ['true',    []]
+                ['false',   []]
+
             ]
 
         implementations:
             IHelper: (node) ->
+                true: -> true
+
+                false: -> false
+
                 wrap: (t, p, v) -> t.replace p, v
 
                 '###': (block, args) -> args
@@ -60,16 +67,9 @@ module.exports =
 
                 not: (a) -> !a
 
-                "stop!": ->
-                    debug "Stop!"
-                    null
+                "stop!": -> null
 
-                "stop?": (p, v) ->
-                    if p is v
-                        debug "Cond stop #{p} == #{v}"
-                        null
-                    else
-                        v
+                "stop?": (p, v) -> if p is v then null else v
 
                 add: (vec) ->
                     vec.reduce (a, b) -> (parseInt a, 10) + (parseInt b, 10)

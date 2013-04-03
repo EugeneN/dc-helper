@@ -23,5 +23,7 @@
   ],
   "main": "./index.js",
   "readme": "libmonad\n========",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "_id": "dc-helper@0.0.4",
+  "_from": "dc-helper@"
 }
