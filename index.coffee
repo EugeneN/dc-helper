@@ -13,6 +13,8 @@ module.exports =
                 ['swap',    ['items_vec', 'cur_item']]
                 ['inc',     ['val']]
                 ['dec',     ['val']]
+                ['parseint',['val']]
+                ['proxyinfo', ['a']]
                 ['->->->',  ['a']]
                 ['say',     ['msgs', 'more'], {vargs: true}]
                 ['info',    ['msgs', 'more'], {vargs: true}]
@@ -24,6 +26,7 @@ module.exports =
                 ['stop!',   []]
                 ['stop?',   ['patrn', 'val']]
                 ['wait',    ['timeout'], {async: true}]
+                ['preventOnEnter', ['event']]
 
                 ['random',  []]
 
@@ -92,6 +95,10 @@ module.exports =
                     debug "[->->->]", a
                     a
 
+                proxyinfo: (a) ->
+                    console.log "%c[proxy:@#{node.id}] ", 'background: #222; color: #bada55', "incoming: #{a}, type: #{typeof a}"
+                    a
+
                 info: info
 
                 error: error
@@ -105,3 +112,10 @@ module.exports =
                 inc: (v) -> parseInt(v, 10) + 1
 
                 dec: (v) -> parseInt(v, 10) - 1
+
+                parseint: (v) -> parseInt v
+
+                preventOnEnter: (e) ->
+                    if e.keyCode is 13
+                        e.preventDefault()
+                    e
