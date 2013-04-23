@@ -1,5 +1,6 @@
 {dispatch_impl} = require 'libprotocol'
 {info, warn, error, debug} = dispatch_impl 'ILogger', 'IHelper'
+Spine = require 'spine'
 
 _isNaN = (v) -> v isnt v
 
@@ -38,10 +39,15 @@ module.exports =
                 ['true',    []]
                 ['false',   []]
 
+                ['spine-fire',    ['event-name']]
+
             ]
 
         implementations:
             IHelper: (node) ->
+                'spine-fire': (event_name) ->
+                    Spine.trigger event_name
+
                 true: -> true
 
                 false: -> false
