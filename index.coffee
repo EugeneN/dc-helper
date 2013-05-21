@@ -4,6 +4,8 @@ Spine = require 'spine'
 
 _isNaN = (v) -> v isnt v
 
+named_waits = {}
+
 module.exports =
     protocols:
         definitions:
@@ -27,6 +29,11 @@ module.exports =
                 ['stop!',   []]
                 ['stop?',   ['patrn', 'val']]
                 ['wait',    ['timeout'], {async: true}]
+
+                ['named-wait',    ['timeout', 'name'], {async: true}]
+                ['cancel-wait',    ['name']]
+
+
                 ['preventOnEnter', ['event']]
 
                 ['random',  []]
@@ -73,6 +80,21 @@ module.exports =
 
                         timeout
                     )
+
+                'named-wait': (timeout, name, _, cont) ->
+                    debug "named-wait", timeout, name
+                    named_waits[name] = setTimeout(
+                        ->
+                            debug debug "named-wait done", timeout, name
+                            cont()
+
+                        timeout
+                    )
+
+                'cancel-wait': (name) ->
+                    if named_waits[name]
+                        debug "cancelling named timeout", name
+                        (clearTimeout named_waits[name]) 
 
                 not: (a) -> !a
 
