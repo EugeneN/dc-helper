@@ -45,6 +45,7 @@ module.exports =
 
                 ['true',    []]
                 ['false',   []]
+                ['the-undefined', []]
 
                 ['spine-fire',    ['event-name']]
 
@@ -58,6 +59,8 @@ module.exports =
                 true: -> true
 
                 false: -> false
+                
+                'the-undefined': -> undefined
 
                 wrap: (t, p, v) -> t.replace p, v
 
