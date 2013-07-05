@@ -1,10 +1,11 @@
+{make_lambda, is_nan} = require 'libprotein'
 {dispatch_impl} = require 'libprotocol'
 {info, warn, error, debug} = dispatch_impl 'ILogger', 'IHelper'
+
 Spine = require 'spine'
 
-_isNaN = (v) -> v isnt v
-
 named_waits = {}
+STOP = null # TODO: import this from libmonad
 
 module.exports =
     protocols:
@@ -49,10 +50,15 @@ module.exports =
 
                 ['spine-fire',    ['event-name']]
 
+                ['match', ['predicate', 'val']]
+
             ]
 
         implementations:
             IHelper: (node) ->
+                'match': (predicate, value) ->
+                    if predicate value then value else STOP
+
                 'spine-fire': (event_name) ->
                     Spine.trigger event_name
 
@@ -101,23 +107,23 @@ module.exports =
 
                 not: (a) -> !a
 
-                "stop!": -> null
+                "stop!": -> STOP
 
-                "stop?": (p, v) -> if p is v then null else v
+                "stop?": (p, v) -> if p is v then STOP else v
 
                 add: (vec) ->
                     vec.reduce (a, b) -> (parseInt a, 10) + (parseInt b, 10)
 
                 drop: (items, item) ->
-                    item_is_in_items = if _isNaN item
-                        !!(items.filter (i) -> _isNaN i).length
+                    item_is_in_items = if is_nan item
+                        !!(items.filter (i) -> is_nan i).length
                     else
                         item in items
 
-                    if item_is_in_items then null else item
+                    if item_is_in_items then STOP else item
 
                 swap: ([from, to], item) ->
-                    if ((_isNaN item) and (_isNaN from)) or (item is from)
+                    if ((is_nan item) and (is_nan from)) or (item is from)
                         to
                     else
                         item
