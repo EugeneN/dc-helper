@@ -52,10 +52,15 @@ module.exports =
 
                 ['match', ['predicate', 'val']]
 
+                ['slice',   ['[start,count]', 'str']]
+
             ]
 
         implementations:
             IHelper: (node) ->
+                'slice': ([start, count], str) ->
+                    str.substr start, count
+
                 'match': (predicate, value) ->
                     if predicate value then value else STOP
 
