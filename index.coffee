@@ -7,6 +7,8 @@ Spine = require 'spine'
 named_waits = {}
 STOP = null # TODO: import this from libmonad
 
+stack = []
+
 module.exports =
     protocols:
         definitions:
@@ -54,6 +56,9 @@ module.exports =
 
                 ['slice',   ['[start,count]', 'str']]
 
+                ['push',    ['i']]
+                ['pop',    []]
+
             ]
 
         implementations:
@@ -61,8 +66,13 @@ module.exports =
                 'slice': ([start, count], str) ->
                     str.substr start, count
 
+                'push': (i) -> stack.push i # TODO monadize
+                
+                'pop': -> stack.pop()
+
                 'match': (predicate, value) ->
-                    if predicate value then value else STOP
+                    real_predicate = make_lambda predicate
+                    if real_predicate value then value else STOP
 
                 'spine-fire': (event_name) ->
                     Spine.trigger event_name
@@ -161,3 +171,11 @@ module.exports =
                     if e.keyCode is 13
                         e.preventDefault()
                     e
+
+                'make-obj': (keyvals) ->
+                    obj = {}
+                    for [key, val] in keyvals
+                        obj[key] = val
+                    obj
+
+                'obj->json': (obj) -> JSON.stringify obj
