@@ -53,12 +53,16 @@ module.exports =
                 ['spine-fire',    ['event-name']]
 
                 ['match', ['predicate', 'val']]
-
+                
                 ['slice',   ['[start,count]', 'str']]
-
-                ['push',    ['i']]
-                ['pop',    []]
-
+                
+                ['push',      ['i']]
+                
+                ['pop',       []]
+                
+                ['make-obj',  ['keyvals']]
+                
+                ['obj->json', ['obj']]
             ]
 
         implementations:
