@@ -63,6 +63,8 @@ module.exports =
                 ['make-obj',  ['keyvals']]
                 
                 ['obj->json', ['obj']]
+                
+                ['location_replace', ['url']]
             ]
 
         implementations:
@@ -183,3 +185,5 @@ module.exports =
                     obj
 
                 'obj->json': (obj) -> JSON.stringify obj
+                
+                location_replace: (url) -> window.location.replace url
