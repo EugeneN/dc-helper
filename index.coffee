@@ -51,6 +51,7 @@ module.exports =
                 ['the-undefined', []]
 
                 ['spine-fire',    ['event-name']]
+                ['spine-fire-args',    ['event-name', 'args']]
 
                 ['match', ['predicate', 'val']]
                 
@@ -82,6 +83,9 @@ module.exports =
 
                 'spine-fire': (event_name) ->
                     Spine.trigger event_name
+                
+                'spine-fire-args': (event_name, args) ->
+                    Spine.trigger event_name, args...
 
                 true: -> true
 
