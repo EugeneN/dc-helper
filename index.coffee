@@ -66,6 +66,8 @@ module.exports =
                 ['obj->json', ['obj']]
                 
                 ['location_replace', ['url']]
+
+                ['getattr', ['key', 'obj']]
             ]
 
         implementations:
@@ -189,5 +191,7 @@ module.exports =
                     obj
 
                 'obj->json': (obj) -> JSON.stringify obj
-                
+
                 location_replace: (url) -> window.location.replace url
+
+                getattr: (key, obj) -> obj[key]
