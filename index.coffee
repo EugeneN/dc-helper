@@ -2,8 +2,6 @@
 {dispatch_impl} = require 'libprotocol'
 {info, warn, error, debug} = dispatch_impl 'ILogger', 'IHelper'
 
-Spine = require 'spine'
-
 named_waits = {}
 STOP = null # TODO: import this from libmonad
 
@@ -82,12 +80,6 @@ module.exports =
                 'match': (predicate, value) ->
                     real_predicate = make_lambda predicate
                     if real_predicate value then value else STOP
-
-                'spine-fire': (event_name) ->
-                    Spine.trigger event_name
-                
-                'spine-fire-args': (event_name, args) ->
-                    Spine.trigger event_name, args...
 
                 true: -> true
 
