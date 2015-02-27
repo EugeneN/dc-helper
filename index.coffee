@@ -48,9 +48,6 @@ module.exports =
                 ['false',   []]
                 ['the-undefined', []]
 
-                ['spine-fire',    ['event-name']]
-                ['spine-fire-args',    ['event-name', 'args']]
-
                 ['match', ['predicate', 'val']]
                 
                 ['slice',   ['[start,count]', 'str']]
