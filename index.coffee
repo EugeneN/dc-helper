@@ -29,6 +29,7 @@ module.exports =
                 ['not',     ['a']]
                 ['stop!',   []]
                 ['stop?',   ['patrn', 'val']]
+                ['pass', ['pattern', 'value']]
                 ['wait',    ['timeout'], {async: true}]
 
                 ['named-wait',    ['timeout', 'name'], {async: true}]
@@ -129,6 +130,9 @@ module.exports =
                 "stop?": (p, v) -> if p is v then STOP else v
                 
                 "or?": (v1, v2) -> if v1 or v2 then true else STOP
+
+                'pass': (pattern, value) ->
+                    if pattern is value then value else STOP
 
                 add: (vec) ->
                     vec.reduce (a, b) -> (parseInt a, 10) + (parseInt b, 10)
