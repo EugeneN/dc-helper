@@ -63,6 +63,7 @@ module.exports =
                 ['location_replace', ['url']]
 
                 ['getattr', ['key', 'obj']]
+                ['or?', ['v1', 'v2']]
             ]
 
         implementations:
@@ -126,6 +127,8 @@ module.exports =
                 "stop!": -> STOP
 
                 "stop?": (p, v) -> if p is v then STOP else v
+                
+                "or?": (v1, v2) -> if v1 or v2 then true else STOP
 
                 add: (vec) ->
                     vec.reduce (a, b) -> (parseInt a, 10) + (parseInt b, 10)
