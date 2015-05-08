@@ -156,7 +156,7 @@ module.exports =
                     a
 
                 proxyinfo: (a) ->
-                    console.log "%c[proxy:@#{node.id}] ", 'background: #222; color: #bada55', "incoming: #{a}, type: #{typeof a}"
+                    console.log "%c[proxy:@#{node.id}] ", 'background: #222; color: #bada55', "incoming type: #{typeof a}", a
                     a
 
                 info: info
